@@ -128,7 +128,7 @@ var unitScalesIEC = []int64{
 func formatNumber(value int64, notations map[int64]string) string {
 	for _, unitScale := range unitScales {
 		if value >= unitScale {
-			return fmt.Sprintf("%.2f%s", float64(value)/float64(unitScale), notations[unitScale])
+			return fmt.Sprintf("%.1f%s", float64(value)/float64(unitScale), notations[unitScale])
 		}
 	}
 	return fmt.Sprintf("%d%s", value, notations[0])
@@ -137,7 +137,7 @@ func formatNumber(value int64, notations map[int64]string) string {
 func formatNumberIEC(value int64, notations map[int64]string) string {
 	for _, unitScale := range unitScalesIEC {
 		if value >= unitScale {
-			return fmt.Sprintf("%.2f%s", float64(value)/float64(unitScale), notations[unitScale])
+			return fmt.Sprintf("%.1f%s", float64(value)/float64(unitScale), notations[unitScale])
 		}
 	}
 	return fmt.Sprintf("%d%s", value, notations[0])
