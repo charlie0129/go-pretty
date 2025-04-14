@@ -286,10 +286,6 @@ func (p *Progress) renderTrackerProgress(out *strings.Builder, t *Tracker, messa
 }
 
 func (p *Progress) renderTrackers(lastRenderLength int) int {
-	if p.LengthActive() == 0 {
-		return 0
-	}
-
 	// buffer all output into a strings.Builder object
 	var out strings.Builder
 	out.Grow(lastRenderLength)
