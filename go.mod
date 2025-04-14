@@ -1,8 +1,9 @@
-module github.com/jedib0t/go-pretty/v6
+module github.com/charlie0129/go-pretty/v6
 
 go 1.18
 
 require (
+	github.com/jedib0t/go-pretty/v6 v6.6.7
 	github.com/mattn/go-runewidth v0.0.16
 	github.com/pkg/profile v1.7.0
 	github.com/stretchr/testify v1.10.0

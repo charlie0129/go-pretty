@@ -93,7 +93,9 @@ func (p *Progress) AppendTracker(t *Tracker) {
 	p.trackersInQueueMutex.Unlock()
 
 	// update the expected total progress since we are appending a new tracker
-	p.overallTracker.UpdateTotal(int64(p.Length()) * 100)
+	if p.Length() > int(p.numTrackersExpected) {
+		p.overallTracker.UpdateTotal(int64(p.Length()) * 100)
+	}
 }
 
 // AppendTrackers appends one or more Trackers for tracking.
