@@ -87,13 +87,13 @@ var (
 
 // FormatBytes formats the given value as a "Byte".
 func FormatBytes(value int64) string {
-	return formatNumber(value, map[int64]string{
-		1000000000000000: "PB",
-		1000000000000:    "TB",
-		1000000000:       "GB",
-		1000000:          "MB",
-		1000:             "KB",
-		0:                "B",
+	return formatNumberIEC(value, map[int64]string{
+		1024 * 1024 * 1024 * 1024 * 1024: "PiB",
+		1024 * 1024 * 1024 * 1024:        "TiB",
+		1024 * 1024 * 1024:               "GiB",
+		1024 * 1024:                      "MiB",
+		1024:                             "KiB",
+		0:                                "B",
 	})
 }
 
@@ -117,8 +117,25 @@ var unitScales = []int64{
 	1000,
 }
 
+var unitScalesIEC = []int64{
+	1024 * 1024 * 1024 * 1024 * 1024,
+	1024 * 1024 * 1024 * 1024,
+	1024 * 1024 * 1024,
+	1024 * 1024,
+	1024,
+}
+
 func formatNumber(value int64, notations map[int64]string) string {
 	for _, unitScale := range unitScales {
+		if value >= unitScale {
+			return fmt.Sprintf("%.2f%s", float64(value)/float64(unitScale), notations[unitScale])
+		}
+	}
+	return fmt.Sprintf("%d%s", value, notations[0])
+}
+
+func formatNumberIEC(value int64, notations map[int64]string) string {
+	for _, unitScale := range unitScalesIEC {
 		if value >= unitScale {
 			return fmt.Sprintf("%.2f%s", float64(value)/float64(unitScale), notations[unitScale])
 		}

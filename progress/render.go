@@ -90,7 +90,7 @@ func (p *Progress) extractDoneAndActiveTrackers() ([]*Tracker, []*Tracker) {
 	p.overallTracker.value = int64(p.LengthDone()+len(trackersDone)) * 100
 	p.overallTracker.value += activeTrackersProgress
 	p.overallTracker.minETA = maxETA
-	if len(trackersActive) == 0 {
+	if len(trackersDone) >= int(p.numTrackersExpected) && len(trackersActive) == 0 {
 		p.overallTracker.MarkAsDone()
 	}
 	return trackersActive, trackersDone
